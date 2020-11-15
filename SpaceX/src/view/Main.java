@@ -1,9 +1,14 @@
 package view;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 
 public class Main extends PApplet{
+	
+	PFont bold; //ROBOTO BOLD
+	PFont light; //ROBOTO LIGHT
+
 	
 	static PImage register; //BACKGROUND IMAGE
 	static PImage login; //BACKGROUND IMAGE
@@ -28,18 +33,35 @@ public class Main extends PApplet{
 	PackageScreen packageScreen = new PackageScreen(this);
 	PaymentScreen paymentScreen = new PaymentScreen(this);
 
+	
 	private int screen = 0;
+	private int selectedPackage = 0;
+
+	
+	// Menu
+	private int posXMenu, posYMenu; 
+	private boolean showMenu=false;	
+	
+
 
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
 	}
 	
+	
+	
 	public void settings() {
 		size(360,750);
 	}
 	
+	
+	
+	
 	public void setup() {
-		
+		//LoadFonts
+		bold = loadFont("Roboto-Bold-64.vlw");
+		light = loadFont("Roboto-Light-64.vlw");
+
 		//Load Images 
 		register = loadImage ("Register.png");
 		login = loadImage ("Log In.png");
@@ -59,45 +81,102 @@ public class Main extends PApplet{
 
 	}
 	
+	
+	
 	public void draw() {
 		
-	
+		System.out.println(mouseX+"//"+mouseY); // Show coordinates
+
 		switch(screen) { // Screens
 
-		  case 0: 
+		  case 0: // Register -- must fill 
+			  
 				registerScreen.paintScreen(register);
-
+				
 				break;
 				
-		  case 1: 
+		  case 1: // Log In -- must fill
+			  
 				loginScreen.paintScreen(login);
 
 				break;
 				
-		  case 2: 
+		  case 2: // Travel Plans -- select one
 				homeScreen.paintScreen(home);
 
 				break;
-		  case 3: 
+				
+				
+		  case 3: // Conctacts -- add contact
 				contactsScreen.paintScreen(contacts);
 
 				break;
 				
-		  case 4: 
-			  	packageScreen.paintScreen(marsInfo);
+		  case 4: // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
+			  	if (selectedPackage==1) {
+			  	packageScreen.paintScreen(interInfo);
+			  	return;
+			  	}else if (selectedPackage==2) {
+				  	packageScreen.paintScreen(moonInfo);
+				  	return;
+				}else if (selectedPackage==3) {
+				  	packageScreen.paintScreen(interInfo);
+				  	return;
+				}
 
 				break;
-		  case 5: 
+				
+				
+		  case 5: //Payment -- fill
 			  	paymentScreen.paintScreen(payment);
 
-				break;
-						
-				
+				break;			
 
-		}}
+		}
+		
+		if (showMenu==true) { // Dropdown Menu
+			System.out.println("show menu");
+			
+			//Background opacity
+			fill(0,0,70,30);
+			rect(0,0,360,750);
+			
+			//Image
+			image(menu, -53, 0,466,418);
+			
+		}
+	}
+	
+	
+	
 	
 	public void mousePressed() {
+		if (screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
+			screen=2;
+			return;
+		}
 		
+		if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+			screen=1;
+			return;
+
+		}
+		if (screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+			screen=2;
+			return;
+
+		}
+		
+		if (screen == 1 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign Up button -- from Login to Register
+			screen=0;
+			return;
+			}
+			
+		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) { //Show menu
+			showMenu=true;
+			return;
+
+		}
 	}
     
 	public void keyPressed() {
