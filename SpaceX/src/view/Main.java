@@ -84,8 +84,9 @@ public class Main extends PApplet{
 	
 	
 	public void draw() {
+		System.out.println(showMenu);
 		
-		System.out.println(mouseX+"//"+mouseY); // Show coordinates
+		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
 
 		switch(screen) { // Screens
 
@@ -120,10 +121,10 @@ public class Main extends PApplet{
 				  	packageScreen.paintScreen(moonInfo);
 				  	return;
 				}else if (selectedPackage==3) {
-				  	packageScreen.paintScreen(interInfo);
+				  	packageScreen.paintScreen(marsInfo);
 				  	return;
 				}
-
+			  	
 				break;
 				
 				
@@ -134,8 +135,7 @@ public class Main extends PApplet{
 
 		}
 		
-		if (showMenu==true) { // Dropdown Menu
-			System.out.println("show menu");
+		if (showMenu==true) { // Dropdown Menu -- all screens except Log in and Register
 			
 			//Background opacity
 			fill(0,0,70,30);
@@ -172,10 +172,41 @@ public class Main extends PApplet{
 			return;
 			}
 			
-		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) { //Show menu
+		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) { //Show menu -- all screens except Log in and Register 
 			showMenu=true;
 			return;
-
+		}
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 116 && mouseY < 140) { //Travel Plans option in dropdown menu
+			screen = 2;
+			showMenu=false;
+			return;
+		}
+		
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 257 && mouseY < 285) { //Contacts option in dropdown menu
+			screen = 3;
+			showMenu=false;
+			return;
+		}
+		
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 144 && mouseY < 177) { //Intercontinental option in dropdown menu
+			selectedPackage=1;
+			screen = 4;
+			showMenu=false;
+			return;
+		}
+		
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 182 && mouseY < 214) { //Moon option in dropdown menu
+			screen = 4;
+			selectedPackage=2;
+			showMenu=false;
+			return;
+		}
+		
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 218 && mouseY < 251) { //Mars option in dropdown menu
+			screen = 4;
+			selectedPackage=3;
+			showMenu=false;
+			return;
 		}
 	}
     
