@@ -5,22 +5,30 @@ import processing.core.PImage;
 
 public class Main extends PApplet{
 	
-	static PImage register; //BACKGROUND
-	static PImage login; //BACKGROUND
-	static PImage home; //BACKGROUND
-	static PImage menu; //DROPDOWN MENU
-	static PImage contacts; //BACKGROUND
+	static PImage register; //BACKGROUND IMAGE
+	static PImage login; //BACKGROUND IMAGE
+	static PImage home; //BACKGROUND IMAGE
+	static PImage menu; //DROPDOWN MENU IMAGE
+	static PImage contacts; //BACKGROUND IMAGE
 	static PImage marsImage; //IMAGE FOR HOME
 	static PImage interImage; //IMAGE FOR HOME
 	static PImage moonImage; //IMAGE FOR HOME
-	static PImage marsInfo; //BACKGROUND
-	static PImage moonInfo; //BACKGROUND
-	static PImage interInfo; //BACKGROUND
-	static PImage payment; //BACKGROUND
+	static PImage marsInfo; //BACKGROUND IMAGE
+	static PImage moonInfo; //BACKGROUND IMAGE
+	static PImage interInfo; //BACKGROUND IMAGE
+	static PImage payment; //BACKGROUND IMAGE
 	static PImage marsPay; //IMAGE FOR PAYMENT
 	static PImage moonPay; //IMAGE FOR PAYMENT
 	static PImage interPay; //IMAGE FOR PAYMENT
 
+	HomeScreen homeScreen = new HomeScreen(this);
+	RegisterScreen registerScreen = new RegisterScreen(this);
+	LogInScreen loginScreen = new LogInScreen(this);
+	ContactsScreen contactsScreen = new ContactsScreen(this);
+	PackageScreen packageScreen = new PackageScreen(this);
+	PaymentScreen paymentScreen = new PaymentScreen(this);
+
+	private int screen = 0;
 
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
@@ -49,9 +57,50 @@ public class Main extends PApplet{
 		marsPay = loadImage ("PayMars.png");
 		interPay = loadImage ("PayIntercontinental.png");
 
-
 	}
 	
 	public void draw() {
-		}
+		
+	
+		switch(screen) { // Screens
+
+		  case 0: 
+				registerScreen.paintScreen(register);
+
+				break;
+				
+		  case 1: 
+				loginScreen.paintScreen(login);
+
+				break;
+				
+		  case 2: 
+				homeScreen.paintScreen(home);
+
+				break;
+		  case 3: 
+				contactsScreen.paintScreen(contacts);
+
+				break;
+				
+		  case 4: 
+			  	packageScreen.paintScreen(marsInfo);
+
+				break;
+		  case 5: 
+			  	paymentScreen.paintScreen(payment);
+
+				break;
+						
+				
+
+		}}
+	
+	public void mousePressed() {
+		
+	}
+    
+	public void keyPressed() {
+		
+	}
 	}
