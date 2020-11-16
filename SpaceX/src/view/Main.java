@@ -2,13 +2,14 @@ package view;
 
 import controlP5.ControlP5;
 import controlP5.Textfield;
+import model.Logica;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 /**
  * Main class 
 
- * @author: Juliana Cruz, Nicolás Montero
+ * @author: Juliana Cruz, Nicolas Montero
 
  * @version: 11/16/2020
 
@@ -56,8 +57,8 @@ public class Main extends PApplet{
 	// Menu
 	private boolean showMenu=false;
 	private boolean registered=false;
-
 	
+	private Logica logica;
 
 
 	public static void main(String[] args) {
@@ -71,9 +72,10 @@ public class Main extends PApplet{
 	}
 	
 	
-	
-	
 	public void setup() {
+		
+		logica = Logica.getInstance();
+		
 		//LoadFonts----------------------------------
 		bold = loadFont("Roboto-Bold-12.vlw");
 		light = loadFont("Roboto-Light-12.vlw");
@@ -128,9 +130,13 @@ public class Main extends PApplet{
 
 
 		
+		
 	}
 	
 	public void draw() {
+		
+		System.out.println(logica.getPlanList());
+		
 		fullInfo();
 		textSize(12);
 		//System.out.println(showMenu);
@@ -160,7 +166,8 @@ public class Main extends PApplet{
 				
 		  case 2: // Travel Plans -- select one
 				homeScreen.paintScreen(home);
-
+				
+				
 				break;
 				
 				
@@ -210,10 +217,11 @@ public class Main extends PApplet{
 			
 			//Background opacity 30%
 			fill(0,0,70,30);
+			noStroke();
 			rect(0,0,360,750);
 			
 			//Image
-			image(menu, -53, 0,466,418);
+			image(menu, -53, 0,466,437);
 			
 		}
 	}
