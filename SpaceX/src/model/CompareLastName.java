@@ -2,7 +2,7 @@ package model;
 
 import java.util.Comparator;
 
-public class CompareLastName implements Comparator <Contact> {
+public class CompareLastName implements Comparator<Contact> {
 
 	public CompareLastName() {
 		

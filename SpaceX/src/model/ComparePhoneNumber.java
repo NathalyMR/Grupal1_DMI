@@ -2,7 +2,7 @@ package model;
 
 import java.util.Comparator;
 
-public class ComparePhoneNumber implements Comparator <Contact> {
+public class ComparePhoneNumber implements Comparator<Contact> {
 
 	public ComparePhoneNumber() {
 
