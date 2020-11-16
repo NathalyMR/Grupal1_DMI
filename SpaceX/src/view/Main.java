@@ -5,7 +5,14 @@ import controlP5.Textfield;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+/**
+ * Main class 
 
+ * @author: Juliana Cruz, Nicolás Montero
+
+ * @version: 11/16/2020
+
+ */
 public class Main extends PApplet{
 	
 	PFont bold; //ROBOTO BOLD
@@ -48,6 +55,8 @@ public class Main extends PApplet{
 	
 	// Menu
 	private boolean showMenu=false;
+	private boolean registered=false;
+
 	
 
 
@@ -101,6 +110,7 @@ public class Main extends PApplet{
 		registerInputs[4] = "Nationality";
 		registerInputs[5] = "Cellphone";
 		
+		
 		for (int i = 0; i < registerInputs.length; i++) {
 
 			cp5.addTextfield(registerInputs[i])
@@ -112,18 +122,23 @@ public class Main extends PApplet{
 			.setColorActive(color(255, 255, 255, 1))
 			.setColorForeground(color(255, 255, 255, 1))
 			.setColorCursor(100)
+			.getCaptionLabel().hide();
 			;}
+		
+
 
 		
 	}
 	
 	public void draw() {
+		fullInfo();
 		textSize(12);
 		//System.out.println(showMenu);
 		
 		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
 		
-		System.out.println(screen); //Show screen number
+		//System.out.println(screen); //Show screen number
+		System.out.println(registered);
 
 
 		switch(screen) { // Screens
@@ -206,15 +221,16 @@ public class Main extends PApplet{
 	
 
 	
-	public void mousePressed() {
-		System.out.println("yes");
+	public void mousePressed() { //Buttons
 		
-		if (screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
+		if (registered==true && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
 			screen=2;
+			clearAllFields();
+			
 			return;
 		}
 		
-		if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+		if (registered==true && screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
 			screen=1;
 			return;
 
@@ -310,7 +326,43 @@ public class Main extends PApplet{
 		
 	}
     
-	public void keyPressed() {
+	
+	public boolean fullInfo() {
+		System.out.println("entra");
+		registered=false;
+		name=cp5.get(Textfield.class, "Name").getText();
+		lastname=cp5.get(Textfield.class, "Last name").getText();
+		email=cp5.get(Textfield.class, "Email").getText();
+		password=cp5.get(Textfield.class, "Password").getText();
+		nationality=cp5.get(Textfield.class, "Nationality").getText();
+		cellphone=cp5.get(Textfield.class, "Cellphone").getText();
 		
+		boolean nameEmpty = name.equals("");
+		boolean lastnameEmpty = lastname.equals("");
+		boolean emailEmpty = email.equals("");
+		boolean passwordEmpty = password.equals("");
+		boolean nationalityEmpty = nationality.equals("");
+		boolean cellphoneEmpty = cellphone.equals("");
+		
+		if(nameEmpty==false && lastnameEmpty==false && emailEmpty==false && passwordEmpty==false 
+				&& nationalityEmpty==false && cellphoneEmpty ==false) {
+			registered=true;
+		}
+		
+		return registered;
 	}
+	
+	public void clearAllFields() {
+		cp5.get(Textfield.class, "Name").setText("");
+		cp5.get(Textfield.class, "Last name").setText("");
+		cp5.get(Textfield.class, "Email").setText("");
+		cp5.get(Textfield.class, "Password").setText("");
+		cp5.get(Textfield.class, "Nationality").setText("");
+		cp5.get(Textfield.class, "Cellphone").setText("");
+
 	}
+
+	
+
+
+}
