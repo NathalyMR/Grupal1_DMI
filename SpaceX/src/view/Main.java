@@ -1,5 +1,7 @@
 package view;
 
+import controlP5.ControlP5;
+import controlP5.Textfield;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -8,6 +10,10 @@ public class Main extends PApplet{
 	
 	PFont bold; //ROBOTO BOLD
 	PFont light; //ROBOTO LIGHT
+
+	public ControlP5 cp5;
+	private String name, lastname, password, email, nationality, cellphone;
+	private String[] registerInputs;
 
 	
 	static PImage register; //BACKGROUND IMAGE
@@ -35,7 +41,6 @@ public class Main extends PApplet{
 	ContactsScreen contactsScreen = new ContactsScreen(this);
 	PackageScreen packageScreen = new PackageScreen(this);
 	PaymentScreen paymentScreen = new PaymentScreen(this);
-
 	
 	private int screen = 0;
 	private int selectedPackage = 0;
@@ -60,11 +65,11 @@ public class Main extends PApplet{
 	
 	
 	public void setup() {
-		//LoadFonts
-		bold = loadFont("Roboto-Bold-64.vlw");
-		light = loadFont("Roboto-Light-64.vlw");
-
-		//Load Images 
+		//LoadFonts----------------------------------
+		bold = loadFont("Roboto-Bold-12.vlw");
+		light = loadFont("Roboto-Light-12.vlw");
+		
+		//Load Images -------------------------------
 		register = loadImage ("Register.png");
 		login = loadImage ("Log In.png");
 		home = loadImage ("Home.png");
@@ -84,24 +89,51 @@ public class Main extends PApplet{
 		congratsMoon = loadImage ("CongratsMoon.png");
 		congratsInter = loadImage ("CongratsInter.png");
 
+		cp5 = new ControlP5(this);
 
+		
+		// Register Inputs ------------------------------
+		registerInputs = new String[6];
+		registerInputs[0] = "Name";
+		registerInputs[1] = "Last name";
+		registerInputs[2] = "Email";
+		registerInputs[3] = "Password";
+		registerInputs[4] = "Nationality";
+		registerInputs[5] = "Cellphone";
+		
+		for (int i = 0; i < registerInputs.length; i++) {
+
+			cp5.addTextfield(registerInputs[i])
+			.setPosition(30, 180 + (i * 60))
+			.setSize(300, 30).setAutoClear(true)
+			.setColorValue(color(70))
+			.setColorBackground(color(255, 255, 255, 1))
+			.setFont(light)
+			.setColorActive(color(255, 255, 255, 1))
+			.setColorForeground(color(255, 255, 255, 1))
+			.setColorCursor(100)
+			;}
+
+		
 	}
 	
-	
-	
 	public void draw() {
+		textSize(12);
 		//System.out.println(showMenu);
 		
 		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
 		
-		System.out.println(screen);
+		System.out.println(screen); //Show screen number
 
 
 		switch(screen) { // Screens
 
 		  case 0: // Register -- must fill 
 			  
-				registerScreen.paintScreen(register);
+				registerScreen.paintScreen(register, bold);	
+				
+				
+						
 				
 				break;
 				
