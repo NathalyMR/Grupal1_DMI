@@ -25,6 +25,9 @@ public class Main extends PApplet{
 	static PImage marsPay; //IMAGE FOR PAYMENT
 	static PImage moonPay; //IMAGE FOR PAYMENT
 	static PImage interPay; //IMAGE FOR PAYMENT
+	static PImage congratsMars; //BACKGROUND IMAGE 
+	static PImage congratsMoon; //BACKGROUND IMAGE 
+	static PImage congratsInter; //BACKGROUND IMAGE 
 
 	HomeScreen homeScreen = new HomeScreen(this);
 	RegisterScreen registerScreen = new RegisterScreen(this);
@@ -39,8 +42,7 @@ public class Main extends PApplet{
 
 	
 	// Menu
-	private int posXMenu, posYMenu; 
-	private boolean showMenu=false;	
+	private boolean showMenu=false;
 	
 
 
@@ -78,15 +80,22 @@ public class Main extends PApplet{
 		moonPay = loadImage ("PayMoon.png");
 		marsPay = loadImage ("PayMars.png");
 		interPay = loadImage ("PayIntercontinental.png");
+		congratsMars = loadImage ("CongratsMars.png");
+		congratsMoon = loadImage ("CongratsMoon.png");
+		congratsInter = loadImage ("CongratsInter.png");
+
 
 	}
 	
 	
 	
 	public void draw() {
-		System.out.println(showMenu);
+		//System.out.println(showMenu);
 		
 		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
+		
+		System.out.println(screen);
+
 
 		switch(screen) { // Screens
 
@@ -131,13 +140,28 @@ public class Main extends PApplet{
 		  case 5: //Payment -- fill
 			  	paymentScreen.paintScreen(payment);
 
-				break;			
+				break;	
+				
+		  case 6: //Congratulations message
+			  
+			  if (selectedPackage==1) {
+				  	image(congratsInter, 0, 0,360,750);
+				  	return;
+				  	}else if (selectedPackage==2) {
+				  		image(congratsMoon, 0, 0,360,750);
+					  	return;
+					}else if (selectedPackage==3) {
+						image(congratsMars, 0, 0,360,750);
+					  	return;
+					}
+
+				break;	
 
 		}
 		
 		if (showMenu==true) { // Dropdown Menu -- all screens except Log in and Register
 			
-			//Background opacity
+			//Background opacity 30%
 			fill(0,0,70,30);
 			rect(0,0,360,750);
 			
@@ -148,17 +172,11 @@ public class Main extends PApplet{
 	}
 	
 	
-	/*Please work
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
-	
-	
+
 	
 	public void mousePressed() {
+		System.out.println("yes");
+		
 		if (screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
 			screen=2;
 			return;
@@ -180,10 +198,17 @@ public class Main extends PApplet{
 			return;
 			}
 			
-		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) { //Show menu -- all screens except Log in and Register 
+		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65 && showMenu== false) { //Show menu -- all screens except Log in and Register 
 			showMenu=true;
 			return;
 		}
+		
+		if (showMenu==true && (mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) || (mouseX > 0 && mouseX < 360 && mouseY > 387 && mouseY < 750) ) { // Hide menu 
+			showMenu=false;
+			return;
+			
+		}
+		
 		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 116 && mouseY < 140) { //Travel Plans option in dropdown menu
 			screen = 2;
 			showMenu=false;
@@ -216,6 +241,41 @@ public class Main extends PApplet{
 			showMenu=false;
 			return;
 		}
+		
+		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 597 && mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
+
+			screen=3;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Buy button -- from Package to Payment
+			screen=5;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 3 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Add passenger button in Contacts-- from Contacts to Package -- Must change price***
+
+			screen=4;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+			
+			screen=2;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+			screen=6;
+			showMenu=false;
+			return;
+			}
+		
+		
 	}
     
 	public void keyPressed() {
