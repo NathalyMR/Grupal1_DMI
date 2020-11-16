@@ -1,7 +1,5 @@
 package view;
 
-import controlP5.ControlP5;
-import controlP5.Textfield;
 import model.Logica;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -19,10 +17,7 @@ public class Main extends PApplet{
 	PFont bold; //ROBOTO BOLD
 	PFont light; //ROBOTO LIGHT
 
-	public ControlP5 cp5;
-	private String name, lastname, password, email, nationality, cellphone;
-	private String[] registerInputs;
-
+	
 	
 	static PImage register; //BACKGROUND IMAGE
 	static PImage login; //BACKGROUND IMAGE
@@ -40,20 +35,19 @@ public class Main extends PApplet{
 	static PImage congratsMoon; //BACKGROUND IMAGE 
 	static PImage congratsInter; //BACKGROUND IMAGE 
 
-	HomeScreen homeScreen = new HomeScreen(this);
-	RegisterScreen registerScreen = new RegisterScreen(this);
-	LogInScreen loginScreen = new LogInScreen(this);
-	ContactsScreen contactsScreen = new ContactsScreen(this);
-	PackageScreen packageScreen = new PackageScreen(this);
-	PaymentScreen paymentScreen = new PaymentScreen(this);
+	private HomeScreen homeScreen;
+	private RegisterScreen registerScreen;
+	private LogInScreen loginScreen;
+	private ContactsScreen contactsScreen;
+	private PackageScreen packageScreen;
+	private PaymentScreen paymentScreen;
 	
-	private int screen = 0;
+	public int screen = 0;
 	private int selectedPackage = 0;
 
 	
 	// Menu
 	private boolean showMenu=false;
-	private boolean registered=false;
 	
 	private Logica logica;
 
@@ -94,51 +88,32 @@ public class Main extends PApplet{
 		congratsMoon = loadImage ("CongratsMoon.png");
 		congratsInter = loadImage ("CongratsInter.png");
 
-		cp5 = new ControlP5(this);
 
+		homeScreen = new HomeScreen(this);
+		registerScreen = new RegisterScreen(this);
+		loginScreen = new LogInScreen(this);
+		contactsScreen = new ContactsScreen(this);
+		packageScreen = new PackageScreen(this);
+		paymentScreen = new PaymentScreen(this);
 		
-		// Register Inputs ------------------------------
-		registerInputs = new String[6];
-		registerInputs[0] = "Name";
-		registerInputs[1] = "Last name";
-		registerInputs[2] = "Email";
-		registerInputs[3] = "Password";
-		registerInputs[4] = "Nationality";
-		registerInputs[5] = "Cellphone";
-		
-		
-		for (int i = 0; i < registerInputs.length; i++) {
-
-			cp5.addTextfield(registerInputs[i])
-			.setPosition(30, 180 + (i * 60))
-			.setSize(300, 30).setAutoClear(true)
-			.setColorValue(color(70))
-			.setColorBackground(color(255, 255, 255, 1))
-			.setFont(light)
-			.setColorActive(color(255, 255, 255, 1))
-			.setColorForeground(color(255, 255, 255, 1))
-			.setColorCursor(100)
-			.getCaptionLabel().hide();
-			;}
-		
+		loginScreen.paintTextfields(light);
+		registerScreen.paintTextfields(light);	
 
 
-		
 		
 	}
 	
 	public void draw() {
 		
-		System.out.println(logica.getPlanList());
+		//System.out.println(logica.getPlanList());
 		
-		fullInfo();
+		
 		textSize(12);
 		//System.out.println(showMenu);
 		
 		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
 		
 		//System.out.println(screen); //Show screen number
-		System.out.println(registered);
 
 
 		switch(screen) { // Screens
@@ -146,8 +121,6 @@ public class Main extends PApplet{
 		  case 0: // Register -- must fill 
 			  
 				registerScreen.paintScreen(register, bold);	
-				
-				
 						
 				
 				break;
@@ -225,22 +198,29 @@ public class Main extends PApplet{
 	
 	public void mousePressed() { //Buttons
 		
-		if (registered==true && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
+		if (registerScreen.registered==true && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
 			screen=2;
-			clearAllFields();
+			registerScreen.clearAllFields();
 			
-			return;
-		}
-		
-		if (registered==true && screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+			return;}
+			if (registerScreen.registered==false && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- not working if fields aren't full
+				screen=0;
+				
+				return;}
+				
+
+		if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+			registerScreen.clearAllFields();
 			screen=1;
 			return;
 
 		}
+		
+		
 		if (screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+			loginScreen.clearAllFields();
 			screen=2;
 			return;
-
 		}
 		
 		if (screen == 1 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign Up button -- from Login to Register
@@ -329,42 +309,5 @@ public class Main extends PApplet{
 	}
     
 	
-	public boolean fullInfo() {
-		System.out.println("entra");
-		registered=false;
-		name=cp5.get(Textfield.class, "Name").getText();
-		lastname=cp5.get(Textfield.class, "Last name").getText();
-		email=cp5.get(Textfield.class, "Email").getText();
-		password=cp5.get(Textfield.class, "Password").getText();
-		nationality=cp5.get(Textfield.class, "Nationality").getText();
-		cellphone=cp5.get(Textfield.class, "Cellphone").getText();
-		
-		boolean nameEmpty = name.equals("");
-		boolean lastnameEmpty = lastname.equals("");
-		boolean emailEmpty = email.equals("");
-		boolean passwordEmpty = password.equals("");
-		boolean nationalityEmpty = nationality.equals("");
-		boolean cellphoneEmpty = cellphone.equals("");
-		
-		if(nameEmpty==false && lastnameEmpty==false && emailEmpty==false && passwordEmpty==false 
-				&& nationalityEmpty==false && cellphoneEmpty ==false) {
-			registered=true;
-		}
-		
-		return registered;
-	}
-	
-	public void clearAllFields() {
-		cp5.get(Textfield.class, "Name").setText("");
-		cp5.get(Textfield.class, "Last name").setText("");
-		cp5.get(Textfield.class, "Email").setText("");
-		cp5.get(Textfield.class, "Password").setText("");
-		cp5.get(Textfield.class, "Nationality").setText("");
-		cp5.get(Textfield.class, "Cellphone").setText("");
-
-	}
-
-	
-
 
 }
