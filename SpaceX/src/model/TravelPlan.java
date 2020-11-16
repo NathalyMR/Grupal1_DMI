@@ -19,9 +19,9 @@ public class TravelPlan {
 		
 	}
 	
-	public void drawPlanPreview(PImage planImg) {
+	public void drawPlanPreview(PImage planImg, int posX, int posY) {
 		
-		app.image(planImg, 0, 0,360,750);
+		app.image(planImg, posX, posY, 665, 308);
 		
 	}
 	

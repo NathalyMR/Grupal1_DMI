@@ -29,9 +29,6 @@ public class Main extends PApplet{
 	static PImage home; //BACKGROUND IMAGE
 	static PImage menu; //DROPDOWN MENU IMAGE
 	static PImage contacts; //BACKGROUND IMAGE
-	static PImage marsImage; //IMAGE FOR HOME
-	static PImage interImage; //IMAGE FOR HOME
-	static PImage moonImage; //IMAGE FOR HOME
 	static PImage marsInfo; //BACKGROUND IMAGE
 	static PImage moonInfo; //BACKGROUND IMAGE
 	static PImage interInfo; //BACKGROUND IMAGE
@@ -86,9 +83,6 @@ public class Main extends PApplet{
 		home = loadImage ("Home.png");
 		menu = loadImage ("DropdownMenu.png");
 		contacts = loadImage ("Contacts.png");
-		marsImage = loadImage ("PackageMars.png");
-		moonImage = loadImage ("PackageMoon.png");
-		interImage = loadImage ("PackageIntercontinental.png");
 		marsInfo = loadImage ("Mars.png");
 		moonInfo = loadImage ("Moon.png");
 		interInfo = loadImage ("Intercontinental.png");

@@ -40,13 +40,13 @@ public class Logica {
 
 		travelPlanList = new ArrayList<TravelPlan>();
 
-		moonPlan = new TravelPlan("Moon", "7 days trip to Moon, 3 days outbound and 3 days coming back", 850000,
+		moonPlan = new MoonPlan("Moon", "7 days trip to Moon, 3 days outbound and 3 days coming back", 850000,
 				app);
 
-		interPlan = new TravelPlan("Intercontinental", "Get anywhere on Earth, faster than ever before", 2500,
+		interPlan = new InterPlan("Intercontinental", "Get anywhere on Earth, faster than ever before", 2500,
 				app);
 
-		marsPlan = new TravelPlan("Mars",
+		marsPlan = new MarsPlan("Mars",
 				"1 year trip to Mars, 6 months outbound and 6 months coming back"
 						+ "It takes place at the time of year when Earth and Mars are closest.",
 				8000000, app);
