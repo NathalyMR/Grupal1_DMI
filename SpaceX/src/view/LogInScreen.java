@@ -3,7 +3,7 @@ package view;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class LogInScreen { //Travel Plans Screen
+public class LogInScreen { //Log In Screen
 	private PApplet app;
 	
 	public LogInScreen(PApplet app) {

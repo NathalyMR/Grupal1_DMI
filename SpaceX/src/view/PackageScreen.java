@@ -3,7 +3,7 @@ package view;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class PackageScreen { //Travel Plans Screen
+public class PackageScreen { //Packages Screens
 	private PApplet app;
 	
 	public PackageScreen(PApplet app) {
