@@ -16,17 +16,6 @@ public class Main extends PApplet{
 	static PImage menu; //DROPDOWN MENU IMAGE
 	static PImage contacts; //BACKGROUND IMAGE
 	static PImage marsImage; //IMAGE FOR HOME
-	
-	  /* 
-	   * 
-	   * this is a merge test
-	   * this is a merge test
-	   * this is a merge test
-	   * this is a merge test
-	   * 
-	   * 
-	   * */
-	
 	static PImage interImage; //IMAGE FOR HOME
 	static PImage moonImage; //IMAGE FOR HOME
 	static PImage marsInfo; //BACKGROUND IMAGE
@@ -80,22 +69,11 @@ public class Main extends PApplet{
 		menu = loadImage ("DropdownMenu.png");
 		contacts = loadImage ("Contacts.png");
 		marsImage = loadImage ("PackageMars.png");
-		
-		  /* 
-		   * 
-		   * this is a merge test
-		   * this is a merge test
-		   * this is a merge test
-		   * this is a merge test
-		   * 
-		   * 
-		   * */
-		
 		moonImage = loadImage ("PackageMoon.png");
 		interImage = loadImage ("PackageIntercontinental.png");
-		// marsInfo = loadImage ("Mars.png");
-		// moonInfo = loadImage ("Moon.png");
-		// interInfo = loadImage ("Intercontinental.png");
+		marsInfo = loadImage ("Mars.png");
+		moonInfo = loadImage ("Moon.png");
+		interInfo = loadImage ("Intercontinental.png");
 		payment = loadImage ("Payment.png");
 		moonPay = loadImage ("PayMoon.png");
 		marsPay = loadImage ("PayMars.png");
@@ -137,16 +115,6 @@ public class Main extends PApplet{
 				
 		  case 4: // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
 			  
-			  /* 
-			   * 
-			   * this is a merge test
-			   * this is a merge test
-			   * this is a merge test
-			   * this is a merge test
-			   * 
-			   * 
-			   * */
-			  
 			  	if (selectedPackage==1) {
 			  	packageScreen.paintScreen(interInfo);
 			  	return;
@@ -184,27 +152,18 @@ public class Main extends PApplet{
 	
 	
 	public void mousePressed() {
-		
-		  /* 
-		   * 
-		   * this is a merge test
-		   * this is a merge test
-		   * this is a merge test
-		   * this is a merge test
-		   * 
-		   * 
-		   * */
-		
+
 		if (screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
 			screen=2;
 			return;
 		}
 		
-		/*if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+		if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
 			screen=1;
 			return;
 
-		}*/
+		}
+		
 		if (screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
 			screen=2;
 			return;
