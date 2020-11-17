@@ -64,6 +64,7 @@ public class RegisterScreen {
 		app.image(image, 0, 0,360,750);
 		app.textFont(font);
 		app.fill(150);
+
 		
 		// Labels -- must disappear to write on textfields
 		if (showName==true) {
@@ -140,8 +141,15 @@ public void clearAllFields() {
 	cp5.get(Textfield.class, "Password").setText("");
 	cp5.get(Textfield.class, "Nationality").setText("");
 	cp5.get(Textfield.class, "Cellphone").setText("");
+
+
+}
+
+public void hide() {
 	cp5.hide();
+}
 
-
+public ControlP5 getCp5() {
+	return cp5;
 }
 }

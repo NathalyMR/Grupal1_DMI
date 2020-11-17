@@ -74,7 +74,7 @@ public class LogInScreen {
 
 		if (showEmail==true) {
 			app.text("Email", 30, 403);
-			if(app.mousePressed == true && app.mouseX > 30 && app.mouseX < 300 && app.mouseY > 383 && app.mouseY < 403) {
+			if(app.mousePressed == true && app.mouseX > 30 && app.mouseX < 300 && app.mouseY > 383 && app.mouseY < 417) {
 				showEmail=false;
 			}
 		}
@@ -109,8 +109,15 @@ public class LogInScreen {
 	public void clearAllFields() {
 		cp5.get(Textfield.class, "User email").setText("");
 		cp5.get(Textfield.class, "User password").setText("");
-		cp5.hide();
 
+	}
+	
+	public void hide() {
+		cp5.hide();
+	}
+	
+	public ControlP5 getCp5() {
+		return cp5;
 	}
 	
 }

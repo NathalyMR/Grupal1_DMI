@@ -106,7 +106,7 @@ public class Main extends PApplet{
 	}
 	
 	public void draw() {
-		//System.out.println(mouseX+"//"+mouseY);
+		System.out.println(mouseX+"//"+mouseY);
 	
 		//System.out.println(logica.getPlanList());
 
@@ -116,7 +116,10 @@ public class Main extends PApplet{
 		  case 0: // Register -- must fill 
 			  
 				registerScreen.paintScreen(register, bold);	
-				registerScreen.fullInfo();		
+				registerScreen.fullInfo();	
+				registerScreen.getCp5().show();
+				loginScreen.getCp5().hide();
+				paymentScreen.getCp5().hide();
 				
 				break;
 				
@@ -124,11 +127,14 @@ public class Main extends PApplet{
 			  
 				loginScreen.paintScreen(login);
 				loginScreen.fullInfo();
+				loginScreen.getCp5().show();
+				registerScreen.getCp5().hide();
 				break;
 				
 		  case 2: // Travel Plans -- select one
 				homeScreen.paintScreen(home);
-				
+				loginScreen.getCp5().hide();
+				registerScreen.getCp5().hide();
 				
 				break;
 				
@@ -156,10 +162,14 @@ public class Main extends PApplet{
 				
 		  case 5: //Payment -- fill
 			  	paymentScreen.paintScreen(payment);
+				paymentScreen.getCp5().show();
+			  	paymentScreen.fullInfo();
 
 				break;	
 				
 		  case 6: //Congratulations message
+				paymentScreen.getCp5().hide();
+
 			  if (selectedPackage==1) {
 				  	image(congratsInter, 0, 0,360,750);
 				  	return;
@@ -195,6 +205,12 @@ public class Main extends PApplet{
 	
 	public void mousePressed() { //Buttons
 		//System.out.println(registerScreen.registered);
+		if (screen == 6 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+			
+			screen=2;
+			showMenu=false;
+			return;
+			}
 		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 597 && mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
 
 			screen=3;
@@ -222,8 +238,14 @@ public class Main extends PApplet{
 			return;
 			}
 		
-		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+		if (paymentScreen.accepted==true &&screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
 			screen=6;
+			showMenu=false;
+			return;
+			}
+		
+		if (paymentScreen.accepted==false &&screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+			screen=5;
 			showMenu=false;
 			return;
 			}
@@ -252,6 +274,8 @@ public class Main extends PApplet{
 		
 		if (loginScreen.logged==true && screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
 			loginScreen.clearAllFields();
+			registerScreen.clearAllFields();
+
 			screen=2;
 			return;
 		}
@@ -284,27 +308,27 @@ public class Main extends PApplet{
 			return;
 		}
 		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 257 && mouseY < 285) { //Contacts option in dropdown menu
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 272 && mouseY < 313) { //Contacts option in dropdown menu
 			screen = 3;
 			showMenu=false;
 			return;
 		}
 		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 144 && mouseY < 177) { //Intercontinental option in dropdown menu
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 150 && mouseY < 186) { //Intercontinental option in dropdown menu
 			selectedPackage=1;
 			screen = 4;
 			showMenu=false;
 			return;
 		}
 		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 182 && mouseY < 214) { //Moon option in dropdown menu
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 192 && mouseY < 229) { //Moon option in dropdown menu
 			screen = 4;
 			selectedPackage=2;
 			showMenu=false;
 			return;
 		}
 		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 218 && mouseY < 251) { //Mars option in dropdown menu
+		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 235 && mouseY < 266) { //Mars option in dropdown menu
 			screen = 4;
 			selectedPackage=3;
 			showMenu=false;

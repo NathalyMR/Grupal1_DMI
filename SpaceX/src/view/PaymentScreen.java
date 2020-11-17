@@ -1,13 +1,16 @@
 package view;
 
 import controlP5.ControlP5;
+import controlP5.Textfield;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 
 public class PaymentScreen { //Payment Screen
 	private PApplet app;
-	private boolean showName=true, showNumber=true, showDate=true, showSecurityCode=true;
+	private boolean showNameInCard=true, showNumber=true, showDate=true, showSecurityCode=true;
+	private String name, number, date, securityCode;
+
 	private ControlP5 cp5;
 	private String[] paymentInputs;
 	public boolean accepted=false;
@@ -29,11 +32,11 @@ public class PaymentScreen { //Payment Screen
 		for (int i = 0; i < paymentInputs.length; i++) {
 
 			cp5.addTextfield(paymentInputs[i])
-			.setPosition(30, 370 + (i * 60))
+			.setPosition(22, 355 + (i * 55))
 			.setSize(300, 30)
 			.setAutoClear(true)
 			.setColorValue(app.color(70))
-			.setColorBackground(app.color(0, 255, 255, 100))
+			.setColorBackground(app.color(255, 255, 255, 1))
 			.setFont(font)
 			.setColorActive(app.color(255, 255, 255, 1))
 			.setColorForeground(app.color(255, 255, 255, 1))
@@ -53,10 +56,10 @@ public class PaymentScreen { //Payment Screen
 
 		
 		// Labels -- must disappear to write on textfields
-		if (showName==true) {
+		if (showNameInCard==true) {
 			app.text("Cardholder’s name", 22, 370);
 			if(app.mousePressed == true && app.mouseX > 22 && app.mouseX < 300 && app.mouseY > 360 && app.mouseY < 390) {
-				showName=false;
+				showNameInCard=false;
 			}
 		}
 		if (showNumber==true) {
@@ -78,6 +81,46 @@ public class PaymentScreen { //Payment Screen
 			}
 		}
 		
+	}
+	
+	public boolean fullInfo() {
+		accepted=false;
+		
+		// Save fields to String variables 
+		name=cp5.get(Textfield.class, "Cardholder’s name").getText();
+		number=cp5.get(Textfield.class, "Card number").getText();
+		date=cp5.get(Textfield.class, "Expiry date (MM/YY)").getText();
+		securityCode=cp5.get(Textfield.class, "Security code").getText();
+		
+		
+		boolean nameEmpty = name.equals("");
+		boolean numberEmpty = number.equals("");
+		boolean dateEmpty = date.equals("");
+		boolean securityCodeEmpty = securityCode.equals("");
+
+		
+		if(nameEmpty==false && numberEmpty==false && dateEmpty==false && securityCodeEmpty==false) {
+			accepted=true;
+		}
+		
+		return accepted;
+	}
+
+	public void clearAllFields() {
+		cp5.get(Textfield.class, "Cardholder’s name").setText("");
+		cp5.get(Textfield.class, "Card number").setText("");
+		cp5.get(Textfield.class, "Expiry date (MM/YY)").setText("");
+		cp5.get(Textfield.class, "Security code").setText("");
+
+
+	}
+	
+	public void hide() {
+		cp5.hide();
+	}
+	
+	public ControlP5 getCp5() {
+		return cp5;
 	}
 
 }
