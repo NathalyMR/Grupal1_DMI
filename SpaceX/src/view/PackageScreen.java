@@ -10,35 +10,37 @@ import model.TravelPlan;
 
 public class PackageScreen { //Packages Screens
 	
-	static PImage marsImage; //IMAGE FOR HOME
-	static PImage interImage; //IMAGE FOR HOME
-	static PImage moonImage; //IMAGE FOR HOME
-	
 	private PApplet app;
 	private Logica logica;
 	
 	public PackageScreen(PApplet app) {
-		this.app = app;
+		
 		logica.getInstance();
 		
-		marsImage = app.loadImage ("PackageMars.png");
-		moonImage = app.loadImage ("PackageMoon.png");
-		interImage = app.loadImage ("PackageIntercontinental.png");
+		this.app = app;
 		
 	}
 	
 	public void paintScreen(PImage image) {
 		app.image(image, 0, 0,360,750);
+		paintPackages(logica.getPlanList());
 		
+		for (int i = 0; i < logica.getPlanList().size(); i++) {
+			
+			logica.getPlanList().get(i).drawPlanPreview(0, 340*i);
+			
+		}
 		
 	}
 	
 	public void paintPackages(ArrayList<TravelPlan> ar) {
 		
-		logica.getPlanList();
-		
+		for (int i = 0; i < ar.size(); i++) {
+			
+			ar.get(i).drawPlanPreview(0, 340*i);
+			
+		}
 		
 	}
-	
 
 }

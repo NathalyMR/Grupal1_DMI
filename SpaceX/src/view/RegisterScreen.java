@@ -23,14 +23,11 @@ public class RegisterScreen {
 	private String[] registerInputs;
 	public boolean registered=false;
 
-
-
 	
 	public RegisterScreen(PApplet app) {
 		this.app = app;
 		cp5 = new ControlP5(app);
 		registerInputs = new String[6];
-		
 
 	}
 	
@@ -111,8 +108,9 @@ public class RegisterScreen {
 	
 
 public boolean fullInfo() {
-	System.out.println("entra");
 	registered=false;
+	
+	// Save fields to String variables 
 	name=cp5.get(Textfield.class, "Name").getText();
 	lastname=cp5.get(Textfield.class, "Last name").getText();
 	email=cp5.get(Textfield.class, "Email").getText();
@@ -142,6 +140,7 @@ public void clearAllFields() {
 	cp5.get(Textfield.class, "Password").setText("");
 	cp5.get(Textfield.class, "Nationality").setText("");
 	cp5.get(Textfield.class, "Cellphone").setText("");
+	cp5.hide();
 
 
 }

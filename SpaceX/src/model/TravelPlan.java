@@ -5,10 +5,10 @@ import processing.core.PImage;
 
 public class TravelPlan {
 	
-	private String name, info;
-	private PImage planImg;
+	private String name;
+	private String info;
 	private int price;
-	
+
 	private PApplet app;
 
 	public TravelPlan(String name, String info, int price, PApplet app) {
@@ -19,9 +19,8 @@ public class TravelPlan {
 		
 	}
 	
-	public void drawPlanPreview(PImage planImg, int posX, int posY) {
+	public void drawPlanPreview(int posX, int posY) {
 		
-		app.image(planImg, posX, posY, 665, 308);
 		
 	}
 	
@@ -39,14 +38,6 @@ public class TravelPlan {
 
 	public void setInfo(String info) {
 		this.info = info;
-	}
-
-	public PImage getPlanImg() {
-		return planImg;
-	}
-
-	public void setPlanImg(PImage planImg) {
-		this.planImg = planImg;
 	}
 
 	public int getPrice() {
