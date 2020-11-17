@@ -28,5 +28,11 @@ public class Controller {
 
 		
 	}
+	
+public void getUserData(String name, String lastname, String email,String password, String nationality, String cellphone) {
+		
+		logica.registerNewUser(name, lastname,email,password,nationality,cellphone);
+		
+	}
 
 }

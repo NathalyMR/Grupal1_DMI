@@ -73,6 +73,12 @@ public class Logica {
 
 	}
 
+	public void registerNewUser(String name, String lastname, String email, String password, String nationality,
+			String cellphone) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/*
 	 * public void logOut() {
 	 * 

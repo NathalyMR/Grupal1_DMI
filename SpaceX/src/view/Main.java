@@ -42,7 +42,7 @@ public class Main extends PApplet{
 	private PackageScreen packageScreen;
 	private PaymentScreen paymentScreen;
 	
-	public int screen = 2;
+	public int screen = 0;
 	private int selectedPackage = 0;
 
 	
