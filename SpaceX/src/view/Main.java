@@ -139,8 +139,8 @@ public class Main extends PApplet{
 				break;
 				
 		  case 2: // Travel Plans -- select one
-				homeScreen.paintScreen(home);
-				homeScreen.paintScreen(intercontinetalI);
+				homeScreen.paintImage(home,0,0,360,750);
+				homeScreen.paintImage(intercontinetalI,27, 210, 294, 136);
 				
 				
 				break;
