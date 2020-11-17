@@ -65,6 +65,8 @@ public class Main extends PApplet{
 	
 	public void setup() {
 		
+		//Aquí estoy llamando a logica y logica tiene initializeTravelPlanList()
+		//aaaaaaaaaaaaaaa
 		logica = Logica.getInstance();
 		
 		//LoadFonts----------------------------------
@@ -106,6 +108,7 @@ public class Main extends PApplet{
 	public void draw() {
 		//System.out.println(mouseX+"//"+mouseY);
 	
+		System.out.println(logica.getPlanList());
 
 
 		switch(screen) { // Screens
