@@ -34,10 +34,6 @@ public class Main extends PApplet{
 	static PImage congratsMars; //BACKGROUND IMAGE 
 	static PImage congratsMoon; //BACKGROUND IMAGE 
 	static PImage congratsInter; //BACKGROUND IMAGE 
-	static PImage intercontinetalI;
-	static PImage marsI;
-	static PImage moonI;
-	
 
 	private HomeScreen homeScreen;
 	private RegisterScreen registerScreen;
@@ -46,7 +42,7 @@ public class Main extends PApplet{
 	private PackageScreen packageScreen;
 	private PaymentScreen paymentScreen;
 	
-	public int screen = 0;
+	public int screen = 2;
 	private int selectedPackage = 0;
 
 	
@@ -69,9 +65,8 @@ public class Main extends PApplet{
 	
 	public void setup() {
 		
-		//Aquí estoy llamando a logica y logica tiene initializeTravelPlanList()
-		//aaaaaaaaaaaaaaa
 		logica = Logica.getInstance();
+		logica.initializeTravelPlanList();
 		
 		//LoadFonts----------------------------------
 		bold = loadFont("Roboto-Bold-12.vlw");
@@ -93,9 +88,6 @@ public class Main extends PApplet{
 		congratsMars = loadImage ("CongratsMars.png");
 		congratsMoon = loadImage ("CongratsMoon.png");
 		congratsInter = loadImage ("CongratsInter.png");
-		intercontinetalI= loadImage ("Group 99.png");
-		marsI= loadImage ("Group 98.png");
-		moonI= loadImage ("Group 97.png");
 
 
 		homeScreen = new HomeScreen(this);
@@ -116,7 +108,7 @@ public class Main extends PApplet{
 	public void draw() {
 		//System.out.println(mouseX+"//"+mouseY);
 	
-		System.out.println(logica.getPlanList());
+		//System.out.println(logica.getPlanList());
 
 
 		switch(screen) { // Screens
@@ -135,8 +127,7 @@ public class Main extends PApplet{
 				break;
 				
 		  case 2: // Travel Plans -- select one
-				homeScreen.paintImage(home,0,0,360,750);
-				homeScreen.paintImage(intercontinetalI,27, 210, 294, 136);
+				homeScreen.paintScreen(home);
 				
 				
 				break;

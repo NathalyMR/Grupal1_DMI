@@ -1,28 +1,32 @@
 package model;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 
 public class TravelPlan {
+	
+	protected PApplet app;
 	
 	private String name;
 	private String info;
 	private int price;
 
-	private PApplet app;
-
 	public TravelPlan(String name, String info, int price, PApplet app) {
+		this.app = app;
 		this.name = name;
 		this.info = info;
 		this.price = price;
-		this.app = app;
 		
 	}
 	
-	public void drawPlanPreview(int posX, int posY) {
+	/*public void drawPlanPreview(int posX, int posY, PImage image) {
 		
+		app.imageMode(PConstants.CENTER);
+		app.image(image, app.width/2, posY, 665, 308);
+		app.imageMode(PConstants.CORNER);
 		
-	}
+	}*/ // –––––––––– couldn't make PApplet work 
 	
 	public String getName() {
 		return name;
@@ -46,14 +50,6 @@ public class TravelPlan {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public PApplet getApp() {
-		return app;
-	}
-
-	public void setApp(PApplet app) {
-		this.app = app;
 	}
 
 }
