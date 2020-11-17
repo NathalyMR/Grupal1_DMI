@@ -21,6 +21,8 @@ public class PackageScreen { // Packages Screens
 
 	public void paintScreen(PImage image) {
 		app.image(image, 0, 0, 360, 750);
+		
+		logica.getPlanList();
 
 	}
 	
