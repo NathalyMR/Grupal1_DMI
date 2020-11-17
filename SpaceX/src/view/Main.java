@@ -148,12 +148,13 @@ public class Main extends PApplet{
 				//4
 		  case "packages": // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
 			  	
+			  textFont(bold);
 			  if (selectedPackage == 1) {
-			  	packageScreen.paintScreen(interInfo);
+			  	packageScreen.paintScreen(interInfo, selectedPackage);
 			  	}else if (selectedPackage == 2) {
-				  	packageScreen.paintScreen(moonInfo);
+				  	packageScreen.paintScreen(moonInfo, selectedPackage);
 				}else if (selectedPackage == 3) {
-				  	packageScreen.paintScreen(marsInfo);
+				  	packageScreen.paintScreen(marsInfo, selectedPackage);
 				}
 			  	
 				break;

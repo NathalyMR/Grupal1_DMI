@@ -7,10 +7,7 @@ import processing.core.PImage;
 public class InterPlan extends TravelPlan {
 
 	public InterPlan(String name, String info, int price, PApplet app) {
-		super(name, info, price, app);
-		name = "Intercontinental";
-		info = "Get anywhere on Earth, faster than ever before";
-		price = 2500;
+		super("Intercontinental", "Get anywhere on Earth, faster than ever before", 2500, app);
 
 	}
 
