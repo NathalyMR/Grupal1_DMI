@@ -39,7 +39,7 @@ public class Main extends PApplet{
 	private PackageScreen packageScreen;
 	private PaymentScreen paymentScreen;
 	
-	private String screen = "home";
+	private String screen = "register";
 	private int selectedPackage = 0;
 
 	
@@ -180,11 +180,11 @@ public class Main extends PApplet{
 		}
 		
 		dropdownMenu();
+		System.out.println(screen);
 	}
 	
 	
 	public void dropdownMenu() {
-		
 		int opacity = 30;
 		
 		if (showMenu == true) { // Drop-down Menu -- all screens except Log in and Register
@@ -258,11 +258,68 @@ public class Main extends PApplet{
 			}
 		
 		/**
+		 * Drop-down menu interactions
+		 */
+		
+		if (showMenu == false && (screen == "home"  || screen == "contacts"|| screen == "packages"  || screen == "payments" || screen == "c")) {
+			System.out.println("Can show menu");
+			if (dist (mouseX, mouseY, 30, 60)< 50) { //Show menu -- all screens except Log in and Register 
+				showMenu=true;
+				return;
+			}
+		}
+		
+		if (showMenu == true) {
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 116 
+					&& mouseY < 140) { //Travel Plans option in drop-down menu
+				screen = "home";
+				selectedPackage = 0;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 235 
+					&& mouseY < 266) { //Mars option in drop-down menu
+				selectedPackage = 3;
+				screen = "packages";
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 192 
+					&& mouseY < 229) { //Moon option in drop-down menu
+				screen = "packages";
+				selectedPackage = 2;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 150 
+					&& mouseY < 186) { //Intercontinental option in drop-down menu
+				screen = "packages";
+				selectedPackage = 1;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 272 
+					&& mouseY < 313) { //Contacts option in drop-down menu
+				selectedPackage = 0;
+				screen = "contacts";
+			}
+			
+			if (dist (mouseX, mouseY, 30, 60)< 50 || (mouseX > 0 
+					&& mouseX < 360 && mouseY > 387 && mouseY < 750) ) { // Hide menu 
+				showMenu = false;
+				return;
+				
+			}
+			
+			showMenu = false;
+			return;	
+		}
+		
+		/**
 		 * Home interactions
 		 */
 		if (screen == "home") {
 			selectedPackage = homeScreen.selectPlan();
-			screen = "packages";
+			if(selectedPackage!=0) {
+				screen = "packages";
+				}
 			return;
 			}
 		
@@ -322,59 +379,6 @@ public class Main extends PApplet{
 			return;
 			}
 			
-		/**
-		 * Drop-down menu interactions
-		 */
 		
-		if (showMenu == false && (screen != "register" || screen != "logIn")) {
-			
-			if (dist (mouseX, mouseY, 30, 60)< 50) { //Show menu -- all screens except Log in and Register 
-				showMenu=true;
-				return;
-			}
-		}
-		
-		if (showMenu == true) {
-			
-			if (mouseX > 23 && mouseX < 335 && mouseY > 116 
-					&& mouseY < 140) { //Travel Plans option in drop-down menu
-				screen = "home";
-				selectedPackage = 0;
-			}
-			
-			if (mouseX > 23 && mouseX < 335 && mouseY > 235 
-					&& mouseY < 266) { //Mars option in drop-down menu
-				selectedPackage = 3;
-				screen = "packages";
-			}
-			
-			if (mouseX > 23 && mouseX < 335 && mouseY > 192 
-					&& mouseY < 229) { //Moon option in drop-down menu
-				screen = "packages";
-				selectedPackage = 2;
-			}
-			
-			if (mouseX > 23 && mouseX < 335 && mouseY > 150 
-					&& mouseY < 186) { //Intercontinental option in drop-down menu
-				screen = "packages";
-				selectedPackage = 1;
-			}
-			
-			if (mouseX > 23 && mouseX < 335 && mouseY > 272 
-					&& mouseY < 313) { //Contacts option in drop-down menu
-				selectedPackage = 0;
-				screen = "contacts";
-			}
-			
-			if (dist (mouseX, mouseY, 30, 60)< 50 || (mouseX > 0 
-					&& mouseX < 360 && mouseY > 387 && mouseY < 750) ) { // Hide menu 
-				showMenu = false;
-				return;
-				
-			}
-			
-			showMenu = false;
-			return;	
-		}
 	}
 }

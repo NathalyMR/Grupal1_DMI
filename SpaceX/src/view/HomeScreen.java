@@ -65,7 +65,6 @@ public class HomeScreen { // Travel Plans Screen
 		if (app.mouseX > 15 && app.mouseX < app.width - 15 && app.mouseY > 500 && app.mouseY < 650) {
 			selection = 3;
 		}
-
 		return selection;
 
 	}

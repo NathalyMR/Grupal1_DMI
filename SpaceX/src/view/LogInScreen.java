@@ -72,7 +72,6 @@ public class LogInScreen {
 	}
 
 	public boolean fullInfo() {
-		System.out.println("entra");
 		logged = false;
 
 		email = cp5.get(Textfield.class, "User email").getText();
