@@ -102,7 +102,8 @@ public class Main extends PApplet{
 		
 		loginScreen.paintTextfields(light);
 
-		
+		paymentScreen.paintTextfields(light);
+
 	}
 	
 	public void draw() {
