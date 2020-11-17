@@ -69,13 +69,16 @@ public class Logica {
 			System.out.println(userList.get(i).getPassword());
 			System.out.println(userList.get(i).getNationality());
 			System.out.println(userList.get(i).getPhoneNumber());
-			System.out.println(">>>>>>>>><<<<<<<<<<");
+			System.out.println("–––––––––––––––––––––");
 		}
 	}
 
-	public void buyTravelPlan() {
-
-	}
+	/*
+	 * Buying process was simulated
+	 * 
+	 * public void buyTravelPlan() {}
+	 * 
+	 */
 
 	public void addContact() {
 
@@ -86,10 +89,9 @@ public class Logica {
 	}
 
 	/*
-	 * public void logOut() {
 	 * 
+	 * public void logOut() {}
 	 * 
-	 * }
 	 */
 
 }

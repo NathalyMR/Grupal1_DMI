@@ -22,7 +22,6 @@ public class Contact implements Comparable <Contact>{
 	
 	@Override
 	public int compareTo(Contact o) {
-
 		return getName().compareTo(o.getName());
 
 	}

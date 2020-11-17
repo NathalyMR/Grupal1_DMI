@@ -8,7 +8,6 @@ public class User {
 	private int phoneNumber;
 	
 	private PApplet app;
-	
 
 	public User(String name, String lastName, String email, String nationality, String password, int phoneNumber, PApplet app) {
 		this.app = app;

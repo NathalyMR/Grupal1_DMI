@@ -33,44 +33,41 @@ public class HomeScreen { // Travel Plans Screen
 		int padding = 15;
 		int borderTop = 240;
 
-		for (int i = 0; i < logica.getPlanList().size(); i++) {
+		// System.out.println(logica.getPlanList().get(i));
 
-			//System.out.println(logica.getPlanList().get(i));
+		app.imageMode(app.CENTER);
+		app.image(interPreview, app.width / 2, borderTop, 665 / 2, 308 / 2);
+		app.image(moonPreview, app.width / 2, (borderTop + 150 + padding), 665 / 2, 308 / 2);
+		app.image(marsPreview, app.width / 2, (borderTop + 300 + padding * 2), 665 / 2, 308 / 2);
 
-			app.imageMode(app.CENTER);
-			app.image(interPreview, app.width / 2, borderTop, 665 / 2, 308 / 2);
-			app.image(moonPreview, app.width / 2, (borderTop + 150 + padding), 665 / 2, 308 / 2);
-			app.image(marsPreview, app.width / 2, (borderTop + 300 + padding * 2), 665 / 2, 308 / 2);
+		app.imageMode(app.CORNER);
 
-			app.imageMode(app.CORNER);
+		/**
+		 * Couldn't make PApplet work in drawPlanPreview() :c
+		 */
 
-			/**
-			 * Couldn't make PApplet work in drawPlanPreview() :c
-			 */
-
-			// logica.getPlanList().get(i).drawPlanPreview(20, 340, interPreview);
-		}
+		// logica.getPlanList().get(i).drawPlanPreview(20, 340, interPreview);
 
 	}
 
 	public int selectPlan() {
 
 		int selection = 0;
-		
+
 		if (app.mouseX > 15 && app.mouseX < app.width - 15 && app.mouseY > 165 && app.mouseY < 320) {
 			selection = 1;
 		}
-		
+
 		if (app.mouseX > 15 && app.mouseX < app.width - 15 && app.mouseY > 331 && app.mouseY < 480) {
 			selection = 2;
 		}
-		
+
 		if (app.mouseX > 15 && app.mouseX < app.width - 15 && app.mouseY > 500 && app.mouseY < 650) {
 			selection = 3;
 		}
-		
+
 		return selection;
-		
+
 	}
 
 }
