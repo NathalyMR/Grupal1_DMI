@@ -11,8 +11,8 @@ public class HomeScreen { //Travel Plans Screen
 		
 	}
 	
-	public void paintScreen(PImage image) {
-		app.image(image, 0, 0,360,750);
+	public void paintImage(PImage image,int x,int y) {
+		app.image(image, x, y);
 	}
-
+	
 }

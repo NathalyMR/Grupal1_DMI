@@ -34,6 +34,10 @@ public class Main extends PApplet{
 	static PImage congratsMars; //BACKGROUND IMAGE 
 	static PImage congratsMoon; //BACKGROUND IMAGE 
 	static PImage congratsInter; //BACKGROUND IMAGE 
+	static PImage intercontinetalI;
+	static PImage marsI;
+	static PImage moonI;
+	
 
 	private HomeScreen homeScreen;
 	private RegisterScreen registerScreen;
@@ -87,6 +91,9 @@ public class Main extends PApplet{
 		congratsMars = loadImage ("CongratsMars.png");
 		congratsMoon = loadImage ("CongratsMoon.png");
 		congratsInter = loadImage ("CongratsInter.png");
+		intercontinetalI= loadImage ("Group 99.png");
+		marsI= loadImage ("Group 98.png");
+		moonI= loadImage ("Group 97.png");
 
 
 		homeScreen = new HomeScreen(this);
@@ -133,6 +140,7 @@ public class Main extends PApplet{
 				
 		  case 2: // Travel Plans -- select one
 				homeScreen.paintScreen(home);
+				homeScreen.paintScreen(intercontinetalI);
 				
 				
 				break;
