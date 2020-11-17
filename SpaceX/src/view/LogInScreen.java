@@ -18,21 +18,27 @@ public class LogInScreen {
 	private PApplet app;
 	private String[] LogInInputs;
 	private ControlP5 cp5;
-	private boolean email=true, password=true;
+	private boolean showEmail=true, showPassword=true;
+	public boolean logged=false;
+	private String password, email;
+
 	
 	public LogInScreen(PApplet app) {
 		this.app = app;
 		cp5 = new ControlP5(app);
 		LogInInputs = new String[2];
-		LogInInputs[0] = "Email";
-		LogInInputs[1] = "Password";
+		LogInInputs[0] = "User email";
+		LogInInputs[1] = "User password";
 		
-		
+		cp5.hide();
+
 		
 	}
 		
 	
 	public void paintTextfields(PFont labelFont) {
+		cp5.show();
+
 		cp5.addTextfield(LogInInputs[0])
 		.setPosition(30, 383)
 		.setSize(300, 30)
@@ -62,27 +68,49 @@ public class LogInScreen {
 	
 	
 	public void paintScreen(PImage image) {
+
 		app.image(image, 0, 0,360,750);
 		app.fill(150);
 
-		if (email==true) {
+		if (showEmail==true) {
 			app.text("Email", 30, 403);
 			if(app.mousePressed == true && app.mouseX > 30 && app.mouseX < 300 && app.mouseY > 383 && app.mouseY < 403) {
-				email=false;
+				showEmail=false;
 			}
 		}
-		if (password==true) {
+		if (showPassword==true) {
 			app.text("Password", 30, 470);
 			if(app.mousePressed == true && app.mouseX > 30 && app.mouseX < 300 && app.mouseY > 450 && app.mouseY < 480) {
-				password=false;
+				showPassword=false;
 			}
 		}
 
 	}
 	
+	public boolean fullInfo() {
+		System.out.println("entra");
+		logged=false;
+
+		email=cp5.get(Textfield.class, "User email").getText();
+		password=cp5.get(Textfield.class, "User password").getText();
+
+	
+		boolean emailEmpty = email.equals("");
+		boolean passwordEmpty = password.equals("");
+
+		
+		if(emailEmpty==false && passwordEmpty==false) {
+			logged=true;
+		}
+		return logged;
+		
+	}
+	
 	public void clearAllFields() {
-		cp5.get(Textfield.class, "Email").setText("");
-		cp5.get(Textfield.class, "Password").setText("");
+		cp5.get(Textfield.class, "User email").setText("");
+		cp5.get(Textfield.class, "User password").setText("");
+		cp5.hide();
+
 	}
 	
 }

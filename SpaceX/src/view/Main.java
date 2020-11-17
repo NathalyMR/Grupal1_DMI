@@ -96,24 +96,16 @@ public class Main extends PApplet{
 		packageScreen = new PackageScreen(this);
 		paymentScreen = new PaymentScreen(this);
 		
-		loginScreen.paintTextfields(light);
 		registerScreen.paintTextfields(light);	
-
+		
+		loginScreen.paintTextfields(light);
 
 		
 	}
 	
 	public void draw() {
-		
-		//System.out.println(logica.getPlanList());
-		
-		
-		textSize(12);
-		//System.out.println(showMenu);
-		
-		//System.out.println(mouseX+"//"+mouseY); // Show coordinates
-		
-		//System.out.println(screen); //Show screen number
+		//System.out.println(mouseX+"//"+mouseY);
+	
 
 
 		switch(screen) { // Screens
@@ -121,14 +113,14 @@ public class Main extends PApplet{
 		  case 0: // Register -- must fill 
 			  
 				registerScreen.paintScreen(register, bold);	
-						
+				registerScreen.fullInfo();		
 				
 				break;
 				
 		  case 1: // Log In -- must fill
 			  
 				loginScreen.paintScreen(login);
-
+				loginScreen.fullInfo();
 				break;
 				
 		  case 2: // Travel Plans -- select one
@@ -144,7 +136,8 @@ public class Main extends PApplet{
 				break;
 				
 		  case 4: // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
-			  	if (selectedPackage==1) {
+			  	
+			  if (selectedPackage==1) {
 			  	packageScreen.paintScreen(interInfo);
 			  	return;
 			  	}else if (selectedPackage==2) {
@@ -164,7 +157,6 @@ public class Main extends PApplet{
 				break;	
 				
 		  case 6: //Congratulations message
-			  
 			  if (selectedPackage==1) {
 				  	image(congratsInter, 0, 0,360,750);
 				  	return;
@@ -175,6 +167,8 @@ public class Main extends PApplet{
 						image(congratsMars, 0, 0,360,750);
 					  	return;
 					}
+					
+					
 
 				break;	
 
@@ -188,7 +182,7 @@ public class Main extends PApplet{
 			rect(0,0,360,750);
 			
 			//Image
-			image(menu, -53, 0,466,437);
+			image(menu, -53, -2,466,445);
 			
 		}
 	}
@@ -197,12 +191,48 @@ public class Main extends PApplet{
 
 	
 	public void mousePressed() { //Buttons
+		//System.out.println(registerScreen.registered);
+		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 597 && mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
+
+			screen=3;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Buy button -- from Package to Payment
+			screen=5;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 3 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Add passenger button in Contacts-- from Contacts to Package -- Must change price***
+
+			screen=4;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+			
+			screen=2;
+			showMenu=false;
+			return;
+			}
+		
+		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+			screen=6;
+			showMenu=false;
+			return;
+			}
 		
 		if (registerScreen.registered==true && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
 			screen=2;
 			registerScreen.clearAllFields();
 			
-			return;}
+			return;
+			}
+		
+		
 			if (registerScreen.registered==false && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- not working if fields aren't full
 				screen=0;
 				
@@ -217,13 +247,19 @@ public class Main extends PApplet{
 		}
 		
 		
-		if (screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+		if (loginScreen.logged==true && screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
 			loginScreen.clearAllFields();
 			screen=2;
 			return;
 		}
 		
+		if (loginScreen.logged==false && screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+			screen=1;
+			return;
+		}
+		
 		if (screen == 1 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign Up button -- from Login to Register
+			loginScreen.clearAllFields();
 			screen=0;
 			return;
 			}
@@ -272,38 +308,8 @@ public class Main extends PApplet{
 			return;
 		}
 		
-		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 597 && mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
-
-			screen=3;
-			showMenu=false;
-			return;
-			}
 		
-		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Buy button -- from Package to Payment
-			screen=5;
-			showMenu=false;
-			return;
-			}
 		
-		if (screen == 3 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Add passenger button in Contacts-- from Contacts to Package -- Must change price***
-
-			screen=4;
-			showMenu=false;
-			return;
-			}
-		
-		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
-			
-			screen=2;
-			showMenu=false;
-			return;
-			}
-		
-		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
-			screen=6;
-			showMenu=false;
-			return;
-			}
 		
 		
 	}
