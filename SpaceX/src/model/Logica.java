@@ -74,10 +74,20 @@ public class Logica {
 	}
 
 	public void registerNewUser(String name, String lastname, String email, String password, String nationality,
-			String cellphone) {
-		// TODO Auto-generated method stub
+			int cellphone) {
+		User newUser = new User(name, lastname,email,password,nationality,cellphone, app);
+		userList.add(newUser);		
 		
+		for(int i = 0; i<userList.size();i++) {
+			System.out.println(userList.get(i).getName());
+			System.out.println(userList.get(i).getLastName());
+			System.out.println(userList.get(i).getEmail());
+			System.out.println(userList.get(i).getPassword());
+			System.out.println(userList.get(i).getNationality());
+			System.out.println(userList.get(i).getPhoneNumber());
+			System.out.println(">>>>>>>>><<<<<<<<<<");
 	}
+		}
 
 	/*
 	 * public void logOut() {

@@ -29,9 +29,9 @@ public class Controller {
 		
 	}
 	
-public void getUserData(String name, String lastname, String email,String password, String nationality, String cellphone) {
+public void getUserData(String name, String lastname, String email,String password, String nationality, int phoneNumber) {
 		
-		logica.registerNewUser(name, lastname,email,password,nationality,cellphone);
+		logica.registerNewUser(name, lastname,email,password,nationality,phoneNumber);
 		
 	}
 
