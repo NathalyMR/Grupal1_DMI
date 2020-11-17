@@ -16,8 +16,8 @@ import processing.core.PImage;
 
 public class Main extends PApplet{
 	
-	PFont bold; //ROBOTO BOLD
-	PFont light; //ROBOTO LIGHT
+	public PFont bold; //ROBOTO BOLD
+	public PFont light; //ROBOTO LIGHT
 	
 	static PImage register; //BACKGROUND IMAGE
 	static PImage login; //BACKGROUND IMAGE
@@ -28,9 +28,6 @@ public class Main extends PApplet{
 	static PImage moonInfo; //BACKGROUND IMAGE
 	static PImage interInfo; //BACKGROUND IMAGE
 	static PImage payment; //BACKGROUND IMAGE
-	static PImage marsPay; //IMAGE FOR PAYMENT
-	static PImage moonPay; //IMAGE FOR PAYMENT
-	static PImage interPay; //IMAGE FOR PAYMENT
 	static PImage congratsMars; //BACKGROUND IMAGE 
 	static PImage congratsMoon; //BACKGROUND IMAGE 
 	static PImage congratsInter; //BACKGROUND IMAGE 
@@ -82,9 +79,6 @@ public class Main extends PApplet{
 		moonInfo = loadImage ("Moon.png");
 		interInfo = loadImage ("Intercontinental.png");
 		payment = loadImage ("Payment.png");
-		moonPay = loadImage ("PayMoon.png");
-		marsPay = loadImage ("PayMars.png");
-		interPay = loadImage ("PayIntercontinental.png");
 		congratsMars = loadImage ("CongratsMars.png");
 		congratsMoon = loadImage ("CongratsMoon.png");
 		congratsInter = loadImage ("CongratsInter.png");
@@ -156,12 +150,14 @@ public class Main extends PApplet{
 				}else if (selectedPackage == 3) {
 				  	packageScreen.paintScreen(marsInfo, selectedPackage);
 				}
+			  
+			  textFont(light);
 			  	
 				break;
 				
 				//5
 		  case "payment": //Payment -- fill
-			  	paymentScreen.paintScreen(payment);
+			  	paymentScreen.paintScreen(payment, selectedPackage);
 				paymentScreen.getCp5().show();
 			  	paymentScreen.fullInfo();
 

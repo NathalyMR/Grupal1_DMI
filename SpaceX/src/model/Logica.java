@@ -45,8 +45,8 @@ public class Logica {
 		interPlan = new InterPlan(null, null, 0, app);
 		marsPlan = new MarsPlan(null, null, 0, app);
 
-		getPlanList().add(moonPlan);
 		getPlanList().add(interPlan);
+		getPlanList().add(moonPlan);
 		getPlanList().add(marsPlan);
 
 	}
