@@ -4,6 +4,7 @@ import model.Logica;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+
 /**
  * Main class 
 
@@ -12,12 +13,11 @@ import processing.core.PImage;
  * @version: 11/16/2020
 
  */
+
 public class Main extends PApplet{
 	
 	PFont bold; //ROBOTO BOLD
 	PFont light; //ROBOTO LIGHT
-
-	
 	
 	static PImage register; //BACKGROUND IMAGE
 	static PImage login; //BACKGROUND IMAGE
@@ -42,7 +42,7 @@ public class Main extends PApplet{
 	private PackageScreen packageScreen;
 	private PaymentScreen paymentScreen;
 	
-	public int screen = 0;
+	private String screen = "home";
 	private int selectedPackage = 0;
 
 	
@@ -106,14 +106,15 @@ public class Main extends PApplet{
 	}
 	
 	public void draw() {
-		System.out.println(mouseX+"//"+mouseY);
+		//System.out.println(mouseX+"//"+mouseY);
 	
 		//System.out.println(logica.getPlanList());
 
 
 		switch(screen) { // Screens
 
-		  case 0: // Register -- must fill 
+				//0
+		  case "register": // Register -- must fill 
 			  
 				registerScreen.paintScreen(register, bold);	
 				registerScreen.fullInfo();	
@@ -123,7 +124,8 @@ public class Main extends PApplet{
 				
 				break;
 				
-		  case 1: // Log In -- must fill
+				//1
+		  case "logIn": // Log In -- must fill
 			  
 				loginScreen.paintScreen(login);
 				loginScreen.fullInfo();
@@ -131,20 +133,24 @@ public class Main extends PApplet{
 				registerScreen.getCp5().hide();
 				break;
 				
-		  case 2: // Travel Plans -- select one
+				//2
+		  case "home": // Travel Plans -- select one
 				homeScreen.paintScreen(home);
 				loginScreen.getCp5().hide();
 				registerScreen.getCp5().hide();
+				paymentScreen.getCp5().hide();
 				
 				break;
 				
 				
-		  case 3: // Conctacts -- add contact
+				//3
+		  case "contacts": // Contacts -- add contact
 				contactsScreen.paintScreen(contacts);
 
 				break;
 				
-		  case 4: // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
+				//4
+		  case "packages": // Packages (Intercontinental, Moon and Mars) -- add passenger or buy
 			  	
 			  if (selectedPackage==1) {
 			  	packageScreen.paintScreen(interInfo);
@@ -159,15 +165,17 @@ public class Main extends PApplet{
 			  	
 				break;
 				
-				
-		  case 5: //Payment -- fill
+				//5
+		  case "payment": //Payment -- fill
 			  	paymentScreen.paintScreen(payment);
 				paymentScreen.getCp5().show();
 			  	paymentScreen.fullInfo();
 
 				break;	
 				
-		  case 6: //Congratulations message
+				
+				//6
+		  case "congrats": //Congratulations message
 				paymentScreen.getCp5().hide();
 
 			  if (selectedPackage==1) {
@@ -195,152 +203,202 @@ public class Main extends PApplet{
 			rect(0,0,360,750);
 			
 			//Image
-			image(menu, -53, -2,466,445);
+			image(menu, -53, -2,466,448);
 			
 		}
+		
+		System.out.println(showMenu);
 	}
 	
 	
 
 	
 	public void mousePressed() { //Buttons
+		
 		//System.out.println(registerScreen.registered);
-		if (screen == 6 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+		
+		if (screen == "congrats" && mouseX > 40 && mouseX < 320 && mouseY > 665 
+				&& mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
 			
-			screen=2;
-			showMenu=false;
+			screen = "home";
 			return;
 			}
-		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 597 && mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
+		
+		/**
+		 * Packages screen interactions
+		 */
+		
+		if (screen == "packages" && mouseX > 40 && mouseX < 320 && mouseY > 597 
+				&& mouseY < 650) { //Add passenger button in Package-- from Package to Contacts
 
-			screen=3;
-			showMenu=false;
+			screen = "contacts";
 			return;
 			}
 		
-		if (screen == 4 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Buy button -- from Package to Payment
-			screen=5;
-			showMenu=false;
-			return;
-			}
-		
-		if (screen == 3 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { //Add passenger button in Contacts-- from Contacts to Package -- Must change price***
-
-			screen=4;
-			showMenu=false;
-			return;
-			}
-		
-		if (screen == 5 && mouseX > 40 && mouseX < 320 && mouseY > 665 && mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+		if (screen == "packages" && mouseX > 40 && mouseX < 320 && mouseY > 665 
+				&& mouseY < 715) { //Buy button -- from Package to Payment
 			
-			screen=2;
-			showMenu=false;
+			screen = "payment";
 			return;
 			}
 		
-		if (paymentScreen.accepted==true &&screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
-			screen=6;
-			showMenu=false;
+		/**
+		 * Contacts screen interactions
+		 */
+		
+		if (screen == "contacts" && mouseX > 40 && mouseX < 320 && mouseY > 665 
+				&& mouseY < 715) { //Add passenger button in Contacts-- from Contacts to Package -- Must change price***
+
+			screen = "packages";
 			return;
 			}
 		
-		if (paymentScreen.accepted==false &&screen == 5 && mouseX > 40 && mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
-			screen=5;
-			showMenu=false;
+		/**
+		 * Payment screen interactions
+		 */
+		
+		if (screen == "payment" && mouseX > 40 && mouseX < 320 && mouseY > 665 
+				&& mouseY < 715) { // Cancel Button in Payment - from Payment to Travel Plans
+			
+			screen = "home";
 			return;
 			}
 		
-		if (registerScreen.registered==true && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
-			screen=2;
+		/**
+		 * Payment results
+		 */
+		
+		if (paymentScreen.accepted == true && screen == "payment" && mouseX > 40 
+				&& mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+			screen = "congrats";
+			return;
+			}
+		
+		if (paymentScreen.accepted == false && screen == "payment" && mouseX > 40 
+				&& mouseX < 320 && mouseY >  597 && mouseY < 650) { // Pay Button in Payment - from Payment to Congratulation message
+			screen = "payment";
+			return;
+			}
+		
+		/**
+		 * Register screen interactions
+		 */
+		
+		if (registerScreen.registered == true && screen == "register" && mouseX > 50 
+				&& mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign Up button -- from Register to Home
+			screen = "home";
 			registerScreen.clearAllFields();
+			return;
+			}
+		
+		if (registerScreen.registered==false && screen == "register" && mouseX > 50 && mouseX < 320 
+				&& mouseY > 563 && mouseY < 613) { //Sign In button -- not working if fields aren't full
+			screen = "register";
 			
 			return;
 			}
 		
-		
-			if (registerScreen.registered==false && screen == 0 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- not working if fields aren't full
-				screen=0;
-				
-				return;}
-				
-
-		if (screen == 0 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign In button -- from Register to Log in
+		if (screen == "register" && mouseX > 50 && mouseX < 640 && mouseY > 563 
+				&& mouseY < 690) { //Sign In button -- from Register to Log in
 			registerScreen.clearAllFields();
-			screen=1;
+			screen = "logIn";
 			return;
-
 		}
 		
-		
-		if (loginScreen.logged==true && screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+		/**
+		 * Home interactions
+		 */
+		if (screen == "home" && selectedPackage == 0) {
 			loginScreen.clearAllFields();
 			registerScreen.clearAllFields();
+			selectedPackage = homeScreen.selectPlan();
+			screen = "packages";
+			return;
+			
+		}
+		
 
-			screen=2;
-			return;
-		}
 		
-		if (loginScreen.logged==false && screen == 1 && mouseX > 50 && mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
-			screen=1;
-			return;
-		}
-		
-		if (screen == 1 && mouseX > 50 && mouseX < 640 && mouseY > 563 && mouseY < 690) { //Sign Up button -- from Login to Register
+		if (loginScreen.logged == true && screen == "logIn" && mouseX > 50 
+				&& mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
 			loginScreen.clearAllFields();
-			screen=0;
+			registerScreen.clearAllFields();
+			screen = "home";
+			return;
+		}
+		
+		if (loginScreen.logged == false && screen == "logIn" && mouseX > 50 
+				&& mouseX < 320 && mouseY > 563 && mouseY < 613) { //Sign In button -- from Login to Home
+			loginScreen.clearAllFields();
+			screen = "logIn";
+			return;
+		}
+		
+		if (screen == "logIn" && mouseX > 50 && mouseX < 640 && mouseY > 563 
+				&& mouseY < 690) { //Sign Up button -- from Login to Register
+			loginScreen.clearAllFields();
+			screen = "register";
 			return;
 			}
 			
-		if ((screen !=0 || screen!=1)  && mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65 && showMenu== false) { //Show menu -- all screens except Log in and Register 
-			showMenu=true;
-			return;
+		/**
+		 * Drop-down menu interactions
+		 */
+		
+		if (showMenu == false && (screen != "register" || screen != "logIn")) {
+			
+			if (dist (mouseX, mouseY, 30, 60)< 50) { //Show menu -- all screens except Log in and Register 
+				showMenu=true;
+				return;
+			}
 		}
 		
-		if (showMenu==true && (mouseX > 22 && mouseX < 35 && mouseY > 52 && mouseY < 65) || (mouseX > 0 && mouseX < 360 && mouseY > 387 && mouseY < 750) ) { // Hide menu 
-			showMenu=false;
+		if (showMenu == true) {
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 116 
+					&& mouseY < 140) { //Travel Plans option in drop-down menu
+				screen = "home";
+				selectedPackage = 0;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 235 
+					&& mouseY < 266) { //Mars option in drop-down menu
+				screen = "packages";
+				selectedPackage = 3;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 192 
+					&& mouseY < 229) { //Moon option in drop-down menu
+				screen = "packages";
+				selectedPackage = 2;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 150 
+					&& mouseY < 186) { //Intercontinental option in drop-down menu
+				screen = "packages";
+				selectedPackage = 1;
+			}
+			
+			if (mouseX > 23 && mouseX < 335 && mouseY > 272 
+					&& mouseY < 313) { //Contacts option in drop-down menu
+				selectedPackage = 0;
+				screen = "contacts";
+			}
+			
+			if (dist (mouseX, mouseY, 30, 60)< 50 || (mouseX > 0 
+					&& mouseX < 360 && mouseY > 387 && mouseY < 750) ) { // Hide menu 
+			
+				showMenu = false;
+				return;
+				
+			}
+			
+			showMenu = false;
 			return;
 			
 		}
-		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 116 && mouseY < 140) { //Travel Plans option in dropdown menu
-			screen = 2;
-			showMenu=false;
-			return;
-		}
-		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 272 && mouseY < 313) { //Contacts option in dropdown menu
-			screen = 3;
-			showMenu=false;
-			return;
-		}
-		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 150 && mouseY < 186) { //Intercontinental option in dropdown menu
-			selectedPackage=1;
-			screen = 4;
-			showMenu=false;
-			return;
-		}
-		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 192 && mouseY < 229) { //Moon option in dropdown menu
-			screen = 4;
-			selectedPackage=2;
-			showMenu=false;
-			return;
-		}
-		
-		if (showMenu==true && mouseX > 23 && mouseX < 335 && mouseY > 235 && mouseY < 266) { //Mars option in dropdown menu
-			screen = 4;
-			selectedPackage=3;
-			showMenu=false;
-			return;
-		}
-		
-		
-		
 		
 		
 	}
-    
-	
 
 }

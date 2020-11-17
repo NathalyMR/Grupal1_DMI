@@ -12,7 +12,7 @@ public class MarsPlan extends TravelPlan {
 		info = "1 year trip to Mars, 6 months outbound and 6 months coming back"
 				+ "It takes place at the time of year when Earth and Mars are closest.";
 		price = 8000000;
-		//this.previewImg = app.loadImage ("PackageMars.png");
+
 	}
 
 }

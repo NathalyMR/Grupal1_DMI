@@ -13,7 +13,6 @@ public class MoonPlan extends TravelPlan {
 		name = "Moon";
 		info = "7 days trip to Moon, 3 days outbound and 3 days coming back";
 		price = 850000;
-	//	this.previewImg = app.loadImage("/data/PackageMoon.png");
 		
 	}
 
